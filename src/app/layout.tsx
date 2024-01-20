@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
 
 import { ThemeContextProvider } from '@/hooks/useTheme';
-
-const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });
 
 export const metadata: Metadata = {
   title: 'Users List',
@@ -20,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.className}>
+      <body>
         <ThemeContextProvider>{children}</ThemeContextProvider>
       </body>
     </html>

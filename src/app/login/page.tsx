@@ -2,9 +2,12 @@
 
 import { LoginInfo } from '@/components/LoginInfo';
 import { ToggleThemeBtn } from '@/components/ToggleThemeBtn';
+import { useTheme } from '@/hooks/useTheme';
 import { Grid } from '@mui/material';
 
 export default function Login() {
+  const { palette } = useTheme();
+
   return (
     <>
       <ToggleThemeBtn />
@@ -19,7 +22,7 @@ export default function Login() {
           item
           xs={5}
           sx={{
-            bgcolor: 'background.white',
+            bgcolor: palette.background?.default,
           }}
         >
           <LoginInfo />
@@ -28,7 +31,7 @@ export default function Login() {
           item
           xs={7}
           sx={{
-            bgcolor: 'background.purple',
+            bgcolor: palette.colorOptions.purple,
           }}
         />
       </Grid>

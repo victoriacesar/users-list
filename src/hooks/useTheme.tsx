@@ -1,7 +1,7 @@
 'use client';
 
 import { getDesignTokens } from '@/styles/theme';
-import { CssBaseline, PaletteMode, Theme } from '@mui/material';
+import { CssBaseline, PaletteMode, PaletteOptions, Theme } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 
@@ -13,13 +13,10 @@ interface ThemeContextType {
   mode: string;
   toggleColorMode: () => void;
   themeColor: Theme;
+  palette: PaletteOptions;
 }
 
-const ThemeContext = createContext<ThemeContextType>({
-  mode: 'light',
-  toggleColorMode: () => {},
-  themeColor: createTheme(),
-});
+const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType);
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps): JSX.Element {
   const [mode, setMode] = useState<PaletteMode>('light');
@@ -28,12 +25,15 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps): J
 
   const themeColor = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
+  const palette = themeColor.palette;
+
   return (
     <ThemeContext.Provider
       value={{
         themeColor,
         toggleColorMode,
         mode,
+        palette,
       }}
     >
       <ThemeProvider theme={themeColor}>

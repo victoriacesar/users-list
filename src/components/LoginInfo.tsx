@@ -1,11 +1,19 @@
 import { useState } from 'react';
-import { InputsSection } from './Input';
+import { InputsSection } from './InputsSection';
 import { Box, Button, Typography } from '@mui/material';
+import { useTheme } from '@/hooks/useTheme';
 
 export const LoginInfo = () => {
+  const { palette } = useTheme();
+  const { colorOptions } = palette;
+
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState({
+    email: false,
+    password: false,
+  });
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -19,29 +27,29 @@ export const LoginInfo = () => {
         justifyContent: 'center',
         height: '100%',
         width: '80%',
-        gap: '1rem',
+        gap: '.5rem',
       }}
     >
       <Typography
         variant="h6"
         gutterBottom
         sx={{
-          color: 'text.lightGray',
+          color: colorOptions.lightGray,
+          fontWeight: '700',
         }}
       >
         LOGO
       </Typography>
       <Box
         sx={{
-          marginTop: '1rem',
-          marginBottom: '1rem',
+          marginBottom: '1.5rem',
         }}
       >
         <Typography
           variant="h6"
           gutterBottom
           sx={{
-            color: 'text.darkGray',
+            color: colorOptions.darkGray,
           }}
         >
           Bem-vindo(a)
@@ -50,7 +58,7 @@ export const LoginInfo = () => {
           variant="subtitle1"
           gutterBottom
           sx={{
-            color: 'text.middleGray',
+            color: colorOptions.middleGray,
           }}
         >
           Acesse sua conta para iniciar a sessão
@@ -63,12 +71,12 @@ export const LoginInfo = () => {
         passwordValue={password}
         emailValue={email}
         handleEmail={(e) => setEmail(e.target.value)}
+        errors={errors}
       />
       <Typography
         variant="subtitle1"
-        gutterBottom
         sx={{
-          color: 'text.purple',
+          color: colorOptions.purple,
           cursor: 'pointer',
         }}
       >
@@ -79,15 +87,21 @@ export const LoginInfo = () => {
         sx={{
           textTransform: 'none',
           fontweight: '400',
-          bgcolor: 'background.purple',
+          bgcolor: colorOptions.purple,
           padding: '10px 25px',
-          color: 'text.oppositeColor',
+          color: colorOptions.oppositeColor,
           ':hover': {
-            bgcolor: 'background.purple',
+            bgcolor: colorOptions.purple,
             filter: 'brightness(0.9)',
           },
-          marginTop: '1rem',
+          marginTop: '1.5rem',
         }}
+        onClick={() =>
+          setErrors((prevState) => ({
+            email: !prevState.email,
+            password: !prevState.password,
+          }))
+        }
       >
         Acessar plataforma
       </Button>

@@ -1,7 +1,8 @@
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useMemo } from 'react';
+import { useTheme } from '@/hooks/useTheme';
 
 interface StyledInputProps {
   handleClick: () => void;
@@ -10,6 +11,10 @@ interface StyledInputProps {
   handleEmail: (event: React.ChangeEvent<HTMLInputElement>) => void;
   emailValue: string;
   passwordValue: string;
+  errors: {
+    email: boolean;
+    password: boolean;
+  };
 }
 
 export const InputsSection = ({
@@ -19,29 +24,48 @@ export const InputsSection = ({
   passwordValue,
   emailValue,
   handleEmail,
+  errors,
 }: StyledInputProps) => {
+  const { palette } = useTheme();
+
   const transformPassword = useMemo(() => {
-    return showPassword ? passwordValue.replace(/./g, '•') : passwordValue;
+    return showPassword ? passwordValue.replace(/./g, '*') : passwordValue;
   }, [passwordValue, showPassword]);
 
   return (
-    <>
+    <Box sx={{ width: '80%' }}>
       <TextField
         id="email-field"
         label="Email"
         variant="outlined"
-        sx={{ width: '80%' }}
+        sx={{ width: '100%' }}
         value={emailValue}
         onChange={handleEmail}
+        error={errors.email}
       />
+      {errors.email && (
+        <Typography
+          variant="subtitle2"
+          sx={{
+            color: palette.colorOptions.red,
+            marginLeft: '10px',
+            fontSize: '0.7rem',
+            fontWeight: 400,
+            marginTop: '3px',
+          }}
+        >
+          Email não encontrado. Confira e tente novamente.
+        </Typography>
+      )}
       <TextField
         id="field-senha"
         label="Senha"
         type="text"
-        sx={{ width: '80%' }}
+        sx={{ width: '100%', marginTop: '1rem' }}
         variant="outlined"
         onChange={handlePassword}
         value={transformPassword}
+        error={errors.password}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -52,6 +76,20 @@ export const InputsSection = ({
           ),
         }}
       />
-    </>
+      {errors.password && (
+        <Typography
+          variant="subtitle2"
+          sx={{
+            color: palette.colorOptions.red,
+            marginLeft: '10px',
+            fontSize: '0.7rem',
+            fontWeight: 400,
+            marginTop: '3px',
+          }}
+        >
+          Senha incorreta. Por favor, verifique e tente novamente.
+        </Typography>
+      )}
+    </Box>
   );
 };
