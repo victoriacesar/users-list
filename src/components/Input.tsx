@@ -1,6 +1,7 @@
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useMemo } from 'react';
 
 interface StyledInputProps {
   handleClick: () => void;
@@ -19,6 +20,10 @@ export const InputsSection = ({
   emailValue,
   handleEmail,
 }: StyledInputProps) => {
+  const transformPassword = useMemo(() => {
+    return showPassword ? passwordValue.replace(/./g, '•') : passwordValue;
+  }, [passwordValue, showPassword]);
+
   return (
     <>
       <TextField
@@ -32,11 +37,11 @@ export const InputsSection = ({
       <TextField
         id="field-senha"
         label="Senha"
-        type={showPassword ? 'text' : 'password'}
+        type="text"
         sx={{ width: '80%' }}
         variant="outlined"
         onChange={handlePassword}
-        value={passwordValue}
+        value={transformPassword}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
