@@ -10,7 +10,14 @@ export default function Login() {
 
   return (
     <>
-      <ToggleThemeBtn />
+      <ToggleThemeBtn
+        props={{
+          right: '10px',
+          top: '10px',
+          position: 'absolute',
+          padding: '10px',
+        }}
+      />
       <Grid
         container
         sx={{

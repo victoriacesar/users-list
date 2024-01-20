@@ -1,7 +1,11 @@
 import { useTheme } from '@/hooks/useTheme';
-import { Button } from '@mui/material';
+import { Button, SxProps, Theme } from '@mui/material';
 
-export const ToggleThemeBtn = () => {
+interface ToggleThemeBtnProps {
+  props?: SxProps<Theme>;
+}
+
+export const ToggleThemeBtn = ({ props }: ToggleThemeBtnProps) => {
   const { toggleColorMode, mode, palette } = useTheme();
 
   return (
@@ -9,14 +13,11 @@ export const ToggleThemeBtn = () => {
       sx={{
         bgcolor: palette.background?.default,
         color: palette.colorOptions.purple,
-        position: 'absolute',
-        right: '10px',
-        top: '10px',
-        padding: '10px',
         ':hover': {
           bgcolor: palette.background?.default,
           filter: 'brightness(0.9)',
         },
+        ...props,
       }}
       onClick={toggleColorMode}
     >

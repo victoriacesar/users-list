@@ -1,4 +1,4 @@
-import { PaletteMode, ThemeOptions } from '@mui/material';
+import { PaletteMode, tableCellClasses, ThemeOptions } from '@mui/material';
 import { amber, blueGrey, grey, red } from '@mui/material/colors';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 
@@ -83,6 +83,43 @@ export const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
           },
           [`&.Mui-error .${outlinedInputClasses.notchedOutline}`]: {
             borderColor: 'var(--TextField-errorFocusedColor)',
+          },
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          ['& .MuiTabs-indicator']: {
+            backgroundColor: '#9747FF',
+          },
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          marginTop: '12px',
+          textTransform: 'none',
+          [`&:hover`]: {
+            color: '#9747FF',
+          },
+          ['&.Mui-selected']: {
+            borderColor: '#9747FF',
+            color: '#9747FF',
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: '1px solid #E2E2E2',
+          [`&.${tableCellClasses.head}`]: {
+            width: '100px',
+          },
+          [`&.${tableCellClasses.body}`]: {
+            fontSize: 14,
           },
         },
       },

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { InputsSection } from './InputsSection';
 import { Box, Button, Typography } from '@mui/material';
 import { useTheme } from '@/hooks/useTheme';
+import { Logo } from './Logo';
 
 export const LoginInfo = () => {
   const { palette } = useTheme();
@@ -30,16 +31,7 @@ export const LoginInfo = () => {
         gap: '.5rem',
       }}
     >
-      <Typography
-        variant="h6"
-        gutterBottom
-        sx={{
-          color: colorOptions.lightGray,
-          fontWeight: '700',
-        }}
-      >
-        LOGO
-      </Typography>
+      <Logo />
       <Box
         sx={{
           marginBottom: '1.5rem',
