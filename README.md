@@ -21,33 +21,28 @@
 
 For this project I follow the conventional commit pattern, to use this pattern I used commitlint, husky and commitizen to have a nice and standardized commit tree.
 
-<p>Features</p>
+#### Features
+
 [x] Light and dark color mode;
 [x] Filter data by text input;
 [x] Sort data by columns and order by asceding or descending;
 [x] Advanced filters and combine them as you want;
 
-<p>Challenges</p>
+#### Challenges
+
 [x] It was my first time using Material UI for design and components in a project;
 [x] The component of the advance filters and the logic to add the filters as you click in the "Adicionar filtro" button;
 [x] The logic to combine the advanced filters was very challenging, I think I spent a whole afternoon just in it.
 
-### Technologies
-
-The following technologies were used in this project:
-
-NextJS, Typescript, Material UI, Context Api.
-
-This project helped me consolidate skills as theming, typed language, and design with a new lib.
-
 ### How to run the project
 
 #### Install
+
 You need to have the git installed in your machine to clone this repository.
 
-Clone this repository and inside the project root directory open the terminal and run the command: 
+Clone this repository and inside the project root directory open the terminal and run the command:
 
-```yarn``` ou ```npm install```
+`yarn` ou `npm install`
 
 #### Run in development mode
 
@@ -55,7 +50,7 @@ You need to have the node installed in your machine in version 18.17 to execute 
 
 After you installed all the dependencies you are ready to go so run the command in the terminal:
 
-```yarn dev``` ou ```npm run dev```
+`yarn dev` ou `npm run dev`
 
 After that access in your browser the local address: <a href="http://localhost:3000">http://localhost:3000</a>
 
@@ -69,6 +64,14 @@ NEXT_PUBLIC_API_URL=value
 ```
 
 Replace the value of the variable for the API value.
+
+### Technologies
+
+The following technologies were used in this project:
+
+NextJS, Typescript, Material UI, Context Api.
+
+This project helped me consolidate skills as theming, typed language, and design with a new lib.
 
 ### Author
 
