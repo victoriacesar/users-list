@@ -9,6 +9,11 @@ declare module '@mui/material/styles' {
       purple: string;
       oppositeColor: string;
       red: string;
+      active: string;
+      inactive: string;
+      activeText: string;
+      inactiveText: string;
+      border: string;
     };
   }
 
@@ -20,6 +25,11 @@ declare module '@mui/material/styles' {
       purple: string;
       oppositeColor: string;
       red: string;
+      active: string;
+      inactive: string;
+      activeText: string;
+      inactiveText: string;
+      border: string;
     };
   }
 }
