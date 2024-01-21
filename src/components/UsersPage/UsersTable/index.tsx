@@ -1,11 +1,10 @@
-import { useTheme } from '@/hooks/useTheme';
-import { mockedData } from '@/mockedData';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { StatusBox } from '../StatusBox';
 import { ActiveInactivePopup } from '../ActiveInactivePopup';
 import { formatDate } from '@/utils/formatters';
 import { sortData, tableHeaderItems } from '../../utils';
+import { useUsers, useTheme } from '@/hooks';
 
 interface UsersTableProps {
   inputSearch: string;
@@ -15,8 +14,9 @@ interface UsersTableProps {
 
 export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) => {
   const { palette } = useTheme();
+  const { usersData } = useUsers();
 
-  const [data, setData] = useState(mockedData);
+  const [data, setData] = useState(usersData);
   const [selectedUser, setSelectedUser] = useState<number>();
 
   const orderData = useMemo(() => {

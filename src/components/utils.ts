@@ -1,4 +1,4 @@
-import { ITableData } from '@/mockedData';
+import { ITableData } from '@/hooks';
 import { isValid, parse } from 'date-fns';
 
 export const tableHeaderItems = ['ID', 'Nome', 'Telefone', 'Data de cadastro', 'Status', ' '];

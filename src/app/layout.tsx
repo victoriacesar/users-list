@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { ThemeContextProvider } from '@/hooks/useTheme';
+import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
 
 export const metadata: Metadata = {
   title: 'Users List',
@@ -18,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeContextProvider>{children}</ThemeContextProvider>
+        <ThemeContextProvider>
+          <UsersProviderProvider>{children}</UsersProviderProvider>
+        </ThemeContextProvider>
       </body>
     </html>
   );
