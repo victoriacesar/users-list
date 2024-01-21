@@ -3,6 +3,7 @@ import { Box, TextField, Typography } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
 import { OrderByBtn } from '.';
 import { FiltersBtn } from './FiltersBtn';
+import { Filter } from '../utils';
 
 interface UsersMenuProps {
   inputSearch: string;
@@ -11,6 +12,8 @@ interface UsersMenuProps {
   setSortBy: Dispatch<SetStateAction<string>>;
   orderBy: string;
   setOrderBy: Dispatch<SetStateAction<string>>;
+  filtersRows: Filter[];
+  setFiltersRows: Dispatch<SetStateAction<Filter[]>>;
 }
 
 export const UsersMenu = ({
@@ -20,6 +23,8 @@ export const UsersMenu = ({
   setSortBy,
   orderBy,
   setOrderBy,
+  filtersRows,
+  setFiltersRows,
 }: UsersMenuProps) => {
   const { palette } = useTheme();
 
@@ -58,7 +63,7 @@ export const UsersMenu = ({
           orderBy={orderBy}
           setOrderBy={setOrderBy}
         />
-        <FiltersBtn />
+        <FiltersBtn filtersRows={filtersRows} setFiltersRows={setFiltersRows} />
       </Box>
     </>
   );

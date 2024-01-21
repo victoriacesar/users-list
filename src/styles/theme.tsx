@@ -70,7 +70,7 @@ export const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
         root: {
           '--TextField-brandBorderColor': '#C4C4C4',
           '--TextField-brandBorderHoverColor': '#757575',
-          '--TextField-brandBorderFocusedColor': '#0c6cbc',
+          '--TextField-brandBorderFocusedColor': '#9747FF',
           '--TextField-errorFocusedColor': red[500],
           '& label.Mui-focused': {
             color: 'var(--TextField-brandBorderFocusedColor)',
@@ -132,6 +132,23 @@ export const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
           },
           [`&.${tableCellClasses.body}`]: {
             fontSize: 14,
+          },
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          '&.MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#6A6A6A',
+            },
+            '&:hover fieldset': {
+              borderColor: '#9747FF',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#9747FF',
+            },
           },
         },
       },

@@ -1,5 +1,30 @@
 import { ITableData } from '@/hooks';
 import { isValid, parse } from 'date-fns';
+import { v4 as uuidv4 } from 'uuid';
+
+interface FilterItem {
+  value: string;
+  label: string;
+}
+
+interface Filters {
+  [key: string]: FilterItem[];
+}
+interface FiltersItems {
+  columns: FilterItem[];
+  filters: Filters;
+}
+
+export interface Filter {
+  id: string;
+  column: string;
+  comparation: string;
+  componentValue: {
+    date: Date;
+    text: string;
+  };
+  condition: string;
+}
 
 export const tableHeaderItems = ['ID', 'Nome', 'Telefone', 'Data de cadastro', 'Status', ' '];
 export const sortByItems = [
@@ -24,6 +49,40 @@ export const sortByItems = [
     value: 'status',
   },
 ];
+export const filtersItems: FiltersItems = {
+  columns: [
+    {
+      value: 'registrationDate',
+      label: 'Data de cadastro',
+    },
+    {
+      value: 'status',
+      label: 'Status',
+    },
+  ],
+  filters: {
+    registrationDate: [
+      {
+        value: 'isEqual',
+        label: 'é',
+      },
+      {
+        value: 'moreThan',
+        label: 'mais que',
+      },
+      {
+        value: 'lessThan',
+        label: 'menos que',
+      },
+    ],
+    status: [
+      {
+        value: 'isEqual',
+        label: 'é',
+      },
+    ],
+  },
+};
 
 const getValue = (value: string | number): string => {
   if (typeof value === 'number') {
@@ -58,4 +117,17 @@ export const sortData = (dataToSort: ITableData[], sortBy: string, orderBy: stri
   });
 
   return sortBy && dataToSort.length > 0 ? sortedData : dataToSort;
+};
+
+export const createNewFilter = () => {
+  return {
+    id: uuidv4(),
+    column: '',
+    comparation: '',
+    componentValue: {
+      date: new Date(),
+      text: '',
+    },
+    condition: 'e',
+  };
 };
