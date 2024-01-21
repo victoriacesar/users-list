@@ -3,9 +3,9 @@
 
 <p align="left">
  <a href="#description">Description</a> • 
-  <a href="#more-information">Information</a> • 
- <a href="#technologies">Technologies</a> • 
+  <a href="#more-information">More Information</a> • 
   <a href="#how-to-run-the-project">How to run the project</a> • 
+ <a href="#technologies">Technologies</a> • 
  <a href="#author">Author</a>
 </p>
 
