@@ -1,7 +1,7 @@
-import { useTheme } from '@/hooks/useTheme';
+import { useTheme as useThemeLocal } from '@/hooks/useTheme';
 import { Avatar, Box } from '@mui/material';
 import { Logo } from '../common/Logo';
-import { Menu } from './Menu';
+import { NavMenu } from './NavMenu';
 import { ToggleThemeBtn } from '../common/ToggleThemeBtn';
 
 interface HeaderProps {
@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 export const Header = ({ handleChangeTab, value }: HeaderProps) => {
-  const { palette } = useTheme();
+  const { palette } = useThemeLocal();
 
   return (
     <Box
@@ -26,7 +26,7 @@ export const Header = ({ handleChangeTab, value }: HeaderProps) => {
       }}
     >
       <Logo />
-      <Menu handleChangeTab={handleChangeTab} value={value} />
+      <NavMenu handleChangeTab={handleChangeTab} value={value} />
       <Box
         sx={{
           marginLeft: 'auto',
