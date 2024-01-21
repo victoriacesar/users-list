@@ -61,7 +61,7 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy, filtersRows }: UsersT
     }
 
     return orderData;
-  }, [filtersRows, orderData]);
+  }, [filtersRows, orderData, sortBy, orderBy]);
 
   const displayUsers = filteredData.slice(rowsVisited, rowsVisited + rowsPerPage);
   const pageCount = Math.ceil(orderData.length / rowsPerPage);
