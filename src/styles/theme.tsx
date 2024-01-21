@@ -25,6 +25,7 @@ export const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
             activeText: '#46855B',
             inactiveText: '#E53E3E',
             border: '#E2E2E2',
+            rowColor: '#ffffff',
           },
           background: {
             default: grey[50],
@@ -49,6 +50,7 @@ export const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
             activeText: '#46855B',
             inactiveText: '#E53E3E',
             border: '#E2E2E2',
+            rowColor: grey[800],
           },
         }),
   },
