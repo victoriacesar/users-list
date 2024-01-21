@@ -12,7 +12,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { StatusBox } from '../StatusBox';
 import { ActiveInactivePopup } from '../ActiveInactivePopup';
 import { formatDate } from '@/utils/formatters';
-import { sortData, tableHeaderItems } from '../../utils';
+import { Filter, advancedFilters, sortData, tableHeaderItems } from '../../utils';
 import { useUsers, useTheme, ITableData } from '@/hooks';
 import { Pagination } from '../Pagination';
 
@@ -20,9 +20,10 @@ interface UsersTableProps {
   inputSearch: string;
   sortBy: string;
   orderBy: string;
+  filtersRows: Filter[];
 }
 
-export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) => {
+export const UsersTable = ({ inputSearch, sortBy, orderBy, filtersRows }: UsersTableProps) => {
   const { palette } = useTheme();
   const { usersData, isLoading } = useUsers();
 
@@ -52,10 +53,18 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
     return sortData(data, sortBy, orderBy);
   }, [inputSearch, data, sortBy, orderBy]);
 
-  const displayUsers = orderData.slice(rowsVisited, rowsVisited + rowsPerPage);
-  const pageCount = Math.ceil(orderData.length / rowsPerPage);
+  const filteredData = useMemo(() => {
+    if (filtersRows.length) {
+      const result = advancedFilters(filtersRows, orderData);
 
-  console.log(Math.ceil(orderData.length / rowsPerPage));
+      return result;
+    }
+
+    return orderData;
+  }, [filtersRows, orderData]);
+
+  const displayUsers = filteredData.slice(rowsVisited, rowsVisited + rowsPerPage);
+  const pageCount = Math.ceil(orderData.length / rowsPerPage);
 
   const toggleActiveInactive = (userId: number, option: string) => {
     const findUserIndex = data.findIndex((item) => item.id === userId);
@@ -78,8 +87,6 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
       </Box>
     );
   }
-
-  console.log(pageCount);
 
   return (
     <>

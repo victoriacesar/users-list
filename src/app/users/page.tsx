@@ -15,7 +15,6 @@ export default function Users() {
   const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
-
   return (
     <Box>
       <Header handleChangeTab={handleChangeTab} value={tabValue} />
@@ -30,7 +29,12 @@ export default function Users() {
           filtersRows={filtersRows}
           setFiltersRows={setFiltersRows}
         />
-        <UsersTable inputSearch={inputSearch} sortBy={sortBy} orderBy={orderBy} />
+        <UsersTable
+          inputSearch={inputSearch}
+          sortBy={sortBy}
+          orderBy={orderBy}
+          filtersRows={filtersRows}
+        />
       </CustomTabPanel>
     </Box>
   );

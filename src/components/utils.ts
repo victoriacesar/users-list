@@ -68,7 +68,7 @@ export const filtersItems: FiltersItems = {
       },
       {
         value: 'moreThan',
-        label: 'mais que',
+        label: 'maior que',
       },
       {
         value: 'lessThan',
@@ -130,4 +130,49 @@ export const createNewFilter = () => {
     },
     condition: 'e',
   };
+};
+
+enum OrderBy {
+  isEqual = 'isEqual',
+  moreThan = 'moreThan',
+  lessThan = 'lessThan',
+}
+
+enum Status {
+  'active' = 'Ativo',
+  'inactive' = 'Inativo',
+}
+
+export const advancedFilters = (filters: Filter[], data: ITableData[]) => {
+  const filterData = data.filter((dataItem) => {
+    return filters.reduce((filter, item) => {
+      const condition = item.condition === 'e' ? '&&' : '||';
+
+      if (!item.column || !item.comparation) {
+        return true;
+      }
+
+      let valueA: Date | string = getValue(dataItem[item.column]);
+      const valueB = getValue(
+        Status[item.componentValue.text as keyof typeof Status] || item.componentValue.date
+      );
+
+      if (item.column === 'registrationDate') {
+        valueA = parse(String(dataItem[item.column]), 'dd-MM-yyyy', new Date());
+      }
+
+      switch (item.comparation) {
+        case OrderBy.isEqual:
+          return condition === '&&' ? filter && valueA === valueB : filter || valueA === valueB;
+        case OrderBy.moreThan:
+          return condition === '&&' ? filter && valueA > valueB : filter || valueA > valueB;
+        case OrderBy.lessThan:
+          return condition === '&&' ? filter && valueA < valueB : filter || valueA < valueB;
+        default:
+          return filter;
+      }
+    }, true);
+  });
+
+  return filterData;
 };

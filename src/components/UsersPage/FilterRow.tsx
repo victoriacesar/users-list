@@ -122,7 +122,7 @@ export const FilterRow = ({
           name={'componentValue'}
         >
           <MenuItem value={'active'}>Ativo</MenuItem>
-          <MenuItem value={'active'}>Inativo</MenuItem>
+          <MenuItem value={'inactive'}>Inativo</MenuItem>
         </Select>
       </FormControl>
     );
