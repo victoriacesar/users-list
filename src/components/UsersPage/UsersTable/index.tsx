@@ -55,6 +55,8 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
   const displayUsers = orderData.slice(rowsVisited, rowsVisited + rowsPerPage);
   const pageCount = Math.ceil(orderData.length / rowsPerPage);
 
+  console.log(Math.ceil(orderData.length / rowsPerPage));
+
   const toggleActiveInactive = (userId: number, option: string) => {
     const findUserIndex = data.findIndex((item) => item.id === userId);
 
@@ -76,6 +78,8 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
       </Box>
     );
   }
+
+  console.log(pageCount);
 
   return (
     <>
@@ -139,7 +143,7 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
       </TableContainer>
       <Pagination
         page={page}
-        pageCount={pageCount}
+        pageCount={rowsPerPage >= pageCount ? rowsPerPage : page}
         rowsPerPage={rowsPerPage}
         setPage={setPage}
         setRowsPerPage={setRowsPerPage}
