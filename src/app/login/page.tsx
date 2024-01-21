@@ -2,17 +2,19 @@
 
 import { LoginInfo } from '@/components/LoginPage';
 import { ToggleThemeBtn } from '@/components/common';
-import { useTheme } from '@/hooks/useTheme';
-import { Grid } from '@mui/material';
+import { useTheme as useThemeLocal } from '@/hooks/useTheme';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 
 export default function Login() {
-  const { palette } = useTheme();
+  const { palette } = useThemeLocal();
+  const theme = useTheme();
+  const onlyMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>
       <ToggleThemeBtn
         props={{
-          right: '10px',
+          right: onlyMediumScreen ? '45px' : '10px',
           top: '10px',
           position: 'absolute',
           padding: '10px',
@@ -27,7 +29,7 @@ export default function Login() {
       >
         <Grid
           item
-          xs={5}
+          xs={onlyMediumScreen ? 11 : 5}
           sx={{
             bgcolor: palette.background?.default,
           }}
@@ -36,7 +38,7 @@ export default function Login() {
         </Grid>
         <Grid
           item
-          xs={7}
+          xs={onlyMediumScreen ? 1 : 7}
           sx={{
             bgcolor: palette.colorOptions.purple,
           }}
