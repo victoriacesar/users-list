@@ -2,12 +2,14 @@
 
 import { CustomTabPanel } from '@/components/CustomTabPanel';
 import { Header } from '@/components/Header';
-import { PatientsTable } from '@/components/PatientsTable';
+import { UsersMenu } from '@/components/UsersMenu';
+import { UsersTable } from '@/components/UsersTable';
 import { Box } from '@mui/material';
 import { useState } from 'react';
 
-export default function Patients() {
+export default function Users() {
   const [tabValue, setTabValue] = useState(0);
+  const [inputSearch, setInputSearch] = useState('');
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -17,7 +19,8 @@ export default function Patients() {
     <Box>
       <Header handleChangeTab={handleChangeTab} value={tabValue} />
       <CustomTabPanel value={tabValue} index={0}>
-        <PatientsTable />
+        <UsersMenu inputSearch={inputSearch} setInputSearch={setInputSearch} />
+        <UsersTable inputSearch={inputSearch} />
       </CustomTabPanel>
     </Box>
   );
