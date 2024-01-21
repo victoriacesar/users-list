@@ -1,8 +1,8 @@
 import { useTheme } from '@/hooks/useTheme';
 import { Avatar, Box } from '@mui/material';
-import { Logo } from './Logo';
+import { Logo } from '../common/Logo';
 import { Menu } from './Menu';
-import { ToggleThemeBtn } from './ToggleThemeBtn';
+import { ToggleThemeBtn } from '../common/ToggleThemeBtn';
 
 interface HeaderProps {
   handleChangeTab: (event: React.SyntheticEvent, newValue: number) => void;
@@ -16,7 +16,7 @@ export const Header = ({ handleChangeTab, value }: HeaderProps) => {
     <Box
       sx={{
         width: '100%',
-        borderBottom: `1px solid ${palette.colorOptions.red}`,
+        borderBottom: `2px solid ${palette.colorOptions.border}`,
         height: '70px',
         padding: '0 3rem 0 3rem',
         display: 'flex',

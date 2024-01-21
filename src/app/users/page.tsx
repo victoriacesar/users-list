@@ -1,9 +1,6 @@
 'use client';
 
-import { CustomTabPanel } from '@/components/CustomTabPanel';
-import { Header } from '@/components/Header';
-import { UsersMenu } from '@/components/UsersMenu';
-import { UsersTable } from '@/components/UsersTable';
+import { CustomTabPanel, Header, UsersMenu, UsersTable } from '@/components/UsersPage';
 import { Box } from '@mui/material';
 import { useState } from 'react';
 

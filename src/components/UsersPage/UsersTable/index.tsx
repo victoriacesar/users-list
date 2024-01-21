@@ -2,9 +2,10 @@ import { useTheme } from '@/hooks/useTheme';
 import { mockedData } from '@/mockedData';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useMemo, useState } from 'react';
-import { StatusBox } from './StatusBox';
-import { ActiveInactivePopup } from './ActiveInactivePopup';
+import { StatusBox } from '../StatusBox';
+import { ActiveInactivePopup } from '../ActiveInactivePopup';
 import { formatDate } from '@/utils/formatters';
+import { tableHeaderItems } from '../../utils';
 
 interface UsersTableProps {
   inputSearch: string;
@@ -53,22 +54,13 @@ export const UsersTable = ({ inputSearch }: UsersTableProps) => {
             }}
           >
             <TableRow>
-              <TableCell align="center" sx={{ position: 'sticky', top: '0px' }}>
-                ID
-              </TableCell>
-              <TableCell align="center" sx={{ position: 'sticky', top: '0px' }}>
-                Nome
-              </TableCell>
-              <TableCell align="center" sx={{ position: 'sticky', top: '0px' }}>
-                Telefone
-              </TableCell>
-              <TableCell align="center" sx={{ position: 'sticky', top: '0px' }}>
-                Data de cadastro
-              </TableCell>
-              <TableCell align="center" sx={{ position: 'sticky', top: '0px' }}>
-                Status
-              </TableCell>
-              <TableCell align="center"></TableCell>
+              {tableHeaderItems.map((item) => {
+                return (
+                  <TableCell key={item} align="center" sx={{ position: 'sticky', top: '0px' }}>
+                    {item}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -79,7 +71,7 @@ export const UsersTable = ({ inputSearch }: UsersTableProps) => {
                   '&:last-child td, &:last-child th': { border: 0 },
                   height: '65px',
                   '&:nth-of-type(odd)': {
-                    backgroundColor: palette.colorOptions.oppositeColor,
+                    backgroundColor: palette.colorOptions.rowColor,
                   },
                   '&:nth-of-type(even)': {
                     backgroundColor: palette.background?.default,

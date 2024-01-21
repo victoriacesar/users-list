@@ -1,7 +1,7 @@
 'use client';
 
-import { LoginInfo } from '@/components/LoginInfo';
-import { ToggleThemeBtn } from '@/components/ToggleThemeBtn';
+import { LoginInfo } from '@/components/LoginPage';
+import { ToggleThemeBtn } from '@/components/common';
 import { useTheme } from '@/hooks/useTheme';
 import { Grid } from '@mui/material';
 

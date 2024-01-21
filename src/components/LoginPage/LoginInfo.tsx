@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { InputsSection } from './InputsSection';
 import { Box, Button, Typography } from '@mui/material';
 import { useTheme } from '@/hooks/useTheme';
-import { Logo } from './Logo';
+import { Logo } from '../common/Logo';
 
 export const LoginInfo = () => {
   const { palette } = useTheme();
