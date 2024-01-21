@@ -25,16 +25,16 @@ For this project I follow the conventional commit pattern, to use this pattern I
 
 #### Features
 
-[x] Light and dark color mode;
-[x] Filter data by text input;
-[x] Sort data by columns and order by asceding or descending;
-[x] Advanced filters and combine them as you want;
+<p>[x] Light and dark color mode;</p>
+<p>[x] Filter data by text input;</p>
+<p>[x] Sort data by columns and order by asceding or descending;</p>
+<p>[x] Advanced filters and combine them as you want;</p>
 
 #### Challenges
 
-[x] It was my first time using Material UI for design and components in a project;
-[x] The component of the advance filters and the logic to add the filters as you click in the "Adicionar filtro" button;
-[x] The logic to combine the advanced filters was very challenging, I think I spent a whole afternoon just in it.
+<p>[x] It was my first time using Material UI for design and components in a project;</p>
+<p>[x] The component of the advance filters and the logic to add the filters as you click in the "Adicionar filtro" button;</p>
+<p>[x] The logic to combine the advanced filters was very challenging, I think I spent a whole afternoon just in it.</p>
 
 ### How to run the project
 
