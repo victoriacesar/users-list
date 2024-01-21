@@ -11,14 +11,16 @@ import {
 } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { orderByItems } from '../utils';
+import { sortByItems } from '../utils';
 
 interface OrderByBtnProps {
+  sortBy: string;
+  setSortBy: Dispatch<SetStateAction<string>>;
   orderBy: string;
   setOrderBy: Dispatch<SetStateAction<string>>;
 }
 
-export const OrderByBtn = ({ orderBy, setOrderBy }: OrderByBtnProps) => {
+export const OrderByBtn = ({ sortBy, setSortBy, orderBy, setOrderBy }: OrderByBtnProps) => {
   const { palette } = useTheme();
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -32,7 +34,7 @@ export const OrderByBtn = ({ orderBy, setOrderBy }: OrderByBtnProps) => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? 'order-by-popover' : undefined;
 
   return (
     <>
@@ -65,13 +67,59 @@ export const OrderByBtn = ({ orderBy, setOrderBy }: OrderByBtnProps) => {
             width: '250px',
           }}
         >
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '2rem',
+            }}
+          >
+            <Button
+              sx={{
+                backgroundColor:
+                  orderBy === 'asc' ? palette.colorOptions.purple : palette.colorOptions.lightGray,
+                color: palette.colorOptions.rowColor,
+                ':hover': {
+                  backgroundColor:
+                    orderBy === 'asc'
+                      ? palette.colorOptions.purple
+                      : palette.colorOptions.lightGray,
+                  filter: 'brightness(0.9)',
+                },
+              }}
+              onClick={() => setOrderBy('asc')}
+            >
+              ASC
+            </Button>
+            <Button
+              sx={{
+                backgroundColor:
+                  orderBy === 'desc' ? palette.colorOptions.purple : palette.colorOptions.lightGray,
+                color: palette.colorOptions.rowColor,
+                ':hover': {
+                  backgroundColor:
+                    orderBy === 'desc'
+                      ? palette.colorOptions.purple
+                      : palette.colorOptions.lightGray,
+                  filter: 'brightness(0.9)',
+                },
+                '& .Mui-selected': {
+                  backgroundColor: palette.colorOptions.purple,
+                },
+              }}
+              onClick={() => setOrderBy('desc')}
+            >
+              DESC
+            </Button>
+          </Box>
           <FormControl>
             <RadioGroup
               name="radio-buttons-order-by-group"
-              value={orderBy}
-              onChange={(event) => setOrderBy((event.target as HTMLInputElement).value)}
+              value={sortBy}
+              onChange={(event) => setSortBy((event.target as HTMLInputElement).value)}
             >
-              {orderByItems.map((item) => {
+              {sortByItems.map((item) => {
                 return (
                   <FormControlLabel
                     key={item.value}

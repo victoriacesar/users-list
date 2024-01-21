@@ -21,7 +21,7 @@ export const ActiveInactivePopup = ({
   const { palette } = useTheme();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? 'active-inactive-popover' : undefined;
 
   const handleClose = () => {
     setAnchorEl(null);

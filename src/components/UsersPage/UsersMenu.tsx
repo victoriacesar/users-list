@@ -1,16 +1,26 @@
 import { useTheme } from '@/hooks/useTheme';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
 import { OrderByBtn } from '.';
+import { FiltersBtn } from './FiltersBtn';
 
 interface UsersMenuProps {
   inputSearch: string;
   setInputSearch: Dispatch<SetStateAction<string>>;
+  sortBy: string;
+  setSortBy: Dispatch<SetStateAction<string>>;
   orderBy: string;
   setOrderBy: Dispatch<SetStateAction<string>>;
 }
 
-export const UsersMenu = ({ inputSearch, setInputSearch, orderBy, setOrderBy }: UsersMenuProps) => {
+export const UsersMenu = ({
+  inputSearch,
+  setInputSearch,
+  sortBy,
+  setSortBy,
+  orderBy,
+  setOrderBy,
+}: UsersMenuProps) => {
   const { palette } = useTheme();
 
   return (
@@ -42,15 +52,13 @@ export const UsersMenu = ({ inputSearch, setInputSearch, orderBy, setOrderBy }: 
           value={inputSearch}
           onChange={(e) => setInputSearch(e.target.value)}
         />
-        <OrderByBtn orderBy={orderBy} setOrderBy={setOrderBy} />
-        <Button
-          sx={{
-            textTransform: 'none',
-            color: palette.colorOptions.purple,
-          }}
-        >
-          Filtrar por
-        </Button>
+        <OrderByBtn
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          orderBy={orderBy}
+          setOrderBy={setOrderBy}
+        />
+        <FiltersBtn />
       </Box>
     </>
   );

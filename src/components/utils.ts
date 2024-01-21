@@ -2,7 +2,7 @@ import { ITableData } from '@/mockedData';
 import { isValid, parse } from 'date-fns';
 
 export const tableHeaderItems = ['ID', 'Nome', 'Telefone', 'Data de cadastro', 'Status', ' '];
-export const orderByItems = [
+export const sortByItems = [
   {
     label: 'ID',
     value: 'id',
@@ -47,13 +47,15 @@ const compareValues = (valueA: string, valueB: string): number => {
   return valueA?.localeCompare(valueB);
 };
 
-export const sortData = (dataToSort: ITableData[], orderBy: string) => {
+export const sortData = (dataToSort: ITableData[], sortBy: string, orderBy: string) => {
   const sortedData = dataToSort.sort((a, b) => {
-    const valueA = getValue(a[orderBy]);
-    const valueB = getValue(b[orderBy]);
+    const values = orderBy === 'asc' ? [a, b] : [b, a];
+
+    const valueA = getValue(values[0][sortBy]);
+    const valueB = getValue(values[1][sortBy]);
 
     return compareValues(valueA, valueB);
   });
 
-  return orderBy && dataToSort.length > 0 ? sortedData : dataToSort;
+  return sortBy && dataToSort.length > 0 ? sortedData : dataToSort;
 };

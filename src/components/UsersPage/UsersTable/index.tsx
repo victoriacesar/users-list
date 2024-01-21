@@ -9,10 +9,11 @@ import { sortData, tableHeaderItems } from '../../utils';
 
 interface UsersTableProps {
   inputSearch: string;
+  sortBy: string;
   orderBy: string;
 }
 
-export const UsersTable = ({ inputSearch, orderBy }: UsersTableProps) => {
+export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) => {
   const { palette } = useTheme();
 
   const [data, setData] = useState(mockedData);
@@ -28,11 +29,11 @@ export const UsersTable = ({ inputSearch, orderBy }: UsersTableProps) => {
         );
       });
 
-      return sortData(filteredData, orderBy);
+      return sortData(filteredData, sortBy, orderBy);
     }
 
-    return sortData(data, orderBy);
-  }, [inputSearch, data, orderBy]);
+    return sortData(data, sortBy, orderBy);
+  }, [inputSearch, data, sortBy, orderBy]);
 
   const toggleActiveInactive = (userId: number, option: string) => {
     const findUserIndex = data.findIndex((item) => item.id === userId);

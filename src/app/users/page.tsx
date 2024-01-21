@@ -7,6 +7,7 @@ import { useState } from 'react';
 export default function Users() {
   const [tabValue, setTabValue] = useState(0);
   const [inputSearch, setInputSearch] = useState('');
+  const [sortBy, setSortBy] = useState('');
   const [orderBy, setOrderBy] = useState('');
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
@@ -20,10 +21,12 @@ export default function Users() {
         <UsersMenu
           inputSearch={inputSearch}
           setInputSearch={setInputSearch}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
           orderBy={orderBy}
           setOrderBy={setOrderBy}
         />
-        <UsersTable inputSearch={inputSearch} orderBy={orderBy} />
+        <UsersTable inputSearch={inputSearch} sortBy={sortBy} orderBy={orderBy} />
       </CustomTabPanel>
     </Box>
   );
