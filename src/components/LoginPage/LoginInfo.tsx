@@ -3,9 +3,13 @@ import { InputsSection } from './InputsSection';
 import { Box, Button, Typography } from '@mui/material';
 import { useTheme } from '@/hooks/useTheme';
 import { Logo } from '../common/Logo';
+import { mockedUsers } from '@/mockedData';
+import { useRouter } from 'next/navigation';
 
 export const LoginInfo = () => {
   const { palette } = useTheme();
+  const router = useRouter();
+
   const { colorOptions } = palette;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -17,6 +21,43 @@ export const LoginInfo = () => {
   });
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const verifyLoginFields = () => {
+    setErrors({
+      email: false,
+      password: false,
+    });
+
+    if (email === '') {
+      setErrors((prev) => ({ ...prev, email: true }));
+    }
+
+    if (password === '') {
+      setErrors((prev) => ({ ...prev, password: true }));
+    }
+  };
+
+  const verifyCredentials = (email: string, password: string) => {
+    const findUser = mockedUsers.find((user) => user.email === email);
+
+    const isEmailEqual = findUser?.email === email;
+    const isPasswordEqual = findUser?.password === password;
+
+    !isEmailEqual && setErrors((prev) => ({ ...prev, email: true }));
+    !isPasswordEqual && setErrors((prev) => ({ ...prev, password: true }));
+
+    if (isEmailEqual && isPasswordEqual) {
+      router.push('/users');
+    }
+  };
+
+  const handleLogin = (email: string, password: string) => {
+    verifyLoginFields();
+
+    if (email && password) {
+      verifyCredentials(email, password);
+    }
+  };
 
   return (
     <Box
@@ -88,12 +129,7 @@ export const LoginInfo = () => {
           },
           marginTop: '1.5rem',
         }}
-        onClick={() =>
-          setErrors((prevState) => ({
-            email: !prevState.email,
-            password: !prevState.password,
-          }))
-        }
+        onClick={() => handleLogin(email, password)}
       >
         Acessar plataforma
       </Button>
