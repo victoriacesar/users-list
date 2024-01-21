@@ -2,8 +2,10 @@
 <p align="center">This app was made to practice code organization, api calls and filter data based on simple and advanced filters.</p>
 
 <p align="left">
- <a href="#description">Description</a> •
+ <a href="#description">Description</a> • 
+  <a href="#more-information">Information</a> • 
  <a href="#technologies">Technologies</a> • 
+  <a href="#how-to-run-the-project">How to run the project</a> • 
  <a href="#author">Author</a>
 </p>
 
