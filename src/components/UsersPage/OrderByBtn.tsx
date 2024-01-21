@@ -67,52 +67,6 @@ export const OrderByBtn = ({ sortBy, setSortBy, orderBy, setOrderBy }: OrderByBt
             width: '250px',
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '2rem',
-            }}
-          >
-            <Button
-              sx={{
-                backgroundColor:
-                  orderBy === 'asc' ? palette.colorOptions.purple : palette.colorOptions.lightGray,
-                color: palette.colorOptions.rowColor,
-                ':hover': {
-                  backgroundColor:
-                    orderBy === 'asc'
-                      ? palette.colorOptions.purple
-                      : palette.colorOptions.lightGray,
-                  filter: 'brightness(0.9)',
-                },
-              }}
-              onClick={() => setOrderBy('asc')}
-            >
-              ASC
-            </Button>
-            <Button
-              sx={{
-                backgroundColor:
-                  orderBy === 'desc' ? palette.colorOptions.purple : palette.colorOptions.lightGray,
-                color: palette.colorOptions.rowColor,
-                ':hover': {
-                  backgroundColor:
-                    orderBy === 'desc'
-                      ? palette.colorOptions.purple
-                      : palette.colorOptions.lightGray,
-                  filter: 'brightness(0.9)',
-                },
-                '& .Mui-selected': {
-                  backgroundColor: palette.colorOptions.purple,
-                },
-              }}
-              onClick={() => setOrderBy('desc')}
-            >
-              DESC
-            </Button>
-          </Box>
           <FormControl>
             <RadioGroup
               name="radio-buttons-order-by-group"
@@ -139,6 +93,58 @@ export const OrderByBtn = ({ sortBy, setSortBy, orderBy, setOrderBy }: OrderByBt
               })}
             </RadioGroup>
           </FormControl>
+          {sortBy && (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '2rem',
+              }}
+            >
+              <Button
+                sx={{
+                  backgroundColor:
+                    orderBy === 'asc'
+                      ? palette.colorOptions.purple
+                      : palette.colorOptions.lightGray,
+                  color: palette.colorOptions.rowColor,
+                  ':hover': {
+                    backgroundColor:
+                      orderBy === 'asc'
+                        ? palette.colorOptions.purple
+                        : palette.colorOptions.lightGray,
+                    filter: 'brightness(0.9)',
+                  },
+                }}
+                onClick={() => setOrderBy('asc')}
+              >
+                ASC
+              </Button>
+              <Button
+                sx={{
+                  backgroundColor:
+                    orderBy === 'desc'
+                      ? palette.colorOptions.purple
+                      : palette.colorOptions.lightGray,
+                  color: palette.colorOptions.rowColor,
+                  ':hover': {
+                    backgroundColor:
+                      orderBy === 'desc'
+                        ? palette.colorOptions.purple
+                        : palette.colorOptions.lightGray,
+                    filter: 'brightness(0.9)',
+                  },
+                  '& .Mui-selected': {
+                    backgroundColor: palette.colorOptions.purple,
+                  },
+                }}
+                onClick={() => setOrderBy('desc')}
+              >
+                DESC
+              </Button>
+            </Box>
+          )}
         </Box>
       </Popover>
     </>

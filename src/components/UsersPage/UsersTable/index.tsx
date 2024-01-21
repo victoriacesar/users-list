@@ -1,10 +1,20 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { useMemo, useState } from 'react';
+import {
+  Box,
+  CircularProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
+import { useEffect, useMemo, useState } from 'react';
 import { StatusBox } from '../StatusBox';
 import { ActiveInactivePopup } from '../ActiveInactivePopup';
 import { formatDate } from '@/utils/formatters';
 import { sortData, tableHeaderItems } from '../../utils';
-import { useUsers, useTheme } from '@/hooks';
+import { useUsers, useTheme, ITableData } from '@/hooks';
+import { Pagination } from '../Pagination';
 
 interface UsersTableProps {
   inputSearch: string;
@@ -14,10 +24,17 @@ interface UsersTableProps {
 
 export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) => {
   const { palette } = useTheme();
-  const { usersData } = useUsers();
+  const { usersData, isLoading } = useUsers();
 
-  const [data, setData] = useState(usersData);
+  const [data, setData] = useState<ITableData[]>([]);
   const [selectedUser, setSelectedUser] = useState<number>();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const rowsVisited = page * rowsPerPage;
+
+  useEffect(() => {
+    setData(usersData);
+  }, [usersData]);
 
   const orderData = useMemo(() => {
     if (inputSearch) {
@@ -35,6 +52,9 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
     return sortData(data, sortBy, orderBy);
   }, [inputSearch, data, sortBy, orderBy]);
 
+  const displayUsers = orderData.slice(rowsVisited, rowsVisited + rowsPerPage);
+  const pageCount = Math.ceil(orderData.length / rowsPerPage);
+
   const toggleActiveInactive = (userId: number, option: string) => {
     const findUserIndex = data.findIndex((item) => item.id === userId);
 
@@ -49,10 +69,22 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
     }
   };
 
+  if (isLoading || !data.length) {
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <CircularProgress color="primary" />
+      </Box>
+    );
+  }
+
   return (
     <>
-      <TableContainer>
-        <Table>
+      <TableContainer
+        sx={{
+          maxHeight: 'calc(66.5px * 5)',
+        }}
+      >
+        <Table stickyHeader>
           <TableHead
             sx={{
               backgroundColor: palette.background?.default,
@@ -69,7 +101,7 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
             </TableRow>
           </TableHead>
           <TableBody>
-            {orderData.map((row) => (
+            {displayUsers.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{
@@ -105,6 +137,13 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy }: UsersTableProps) =>
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination
+        page={page}
+        pageCount={pageCount}
+        rowsPerPage={rowsPerPage}
+        setPage={setPage}
+        setRowsPerPage={setRowsPerPage}
+      />
     </>
   );
 };

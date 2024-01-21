@@ -9,6 +9,7 @@ interface UsersContextProviderProps {
 
 interface IUsersContext {
   usersData: ITableData[];
+  isLoading: boolean;
 }
 
 export interface ITableData {
@@ -24,6 +25,7 @@ const UsersProvider = createContext<IUsersContext>({} as IUsersContext);
 
 export function UsersProviderProvider({ children }: UsersContextProviderProps): JSX.Element {
   const [usersData, setUsersData] = useState<ITableData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchUsers = async () => {
     const { data } = await api.get('/users');
@@ -33,8 +35,10 @@ export function UsersProviderProvider({ children }: UsersContextProviderProps): 
 
   useEffect(() => {
     const getUsers = async () => {
+      setIsLoading(true);
       const result = await fetchUsers();
       setUsersData(result);
+      setIsLoading(false);
     };
 
     getUsers();
@@ -44,6 +48,7 @@ export function UsersProviderProvider({ children }: UsersContextProviderProps): 
     <UsersProvider.Provider
       value={{
         usersData,
+        isLoading,
       }}
     >
       {children}

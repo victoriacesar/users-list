@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
+import './global.css';
 
 export const metadata: Metadata = {
   title: 'Users List',
