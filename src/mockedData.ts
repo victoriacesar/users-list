@@ -1,3 +1,12 @@
+export interface ITableData {
+  id: number;
+  name: string;
+  phone: string;
+  registrationDate: string;
+  status: string;
+  [key: string]: string | number;
+}
+
 export const mockedData = [
   {
     id: 94944,

@@ -1,13 +1,16 @@
 import { useTheme } from '@/hooks/useTheme';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
+import { OrderByBtn } from '.';
 
 interface UsersMenuProps {
   inputSearch: string;
   setInputSearch: Dispatch<SetStateAction<string>>;
+  orderBy: string;
+  setOrderBy: Dispatch<SetStateAction<string>>;
 }
 
-export const UsersMenu = ({ inputSearch, setInputSearch }: UsersMenuProps) => {
+export const UsersMenu = ({ inputSearch, setInputSearch, orderBy, setOrderBy }: UsersMenuProps) => {
   const { palette } = useTheme();
 
   return (
@@ -39,14 +42,7 @@ export const UsersMenu = ({ inputSearch, setInputSearch }: UsersMenuProps) => {
           value={inputSearch}
           onChange={(e) => setInputSearch(e.target.value)}
         />
-        <Button
-          sx={{
-            textTransform: 'none',
-            color: palette.colorOptions.purple,
-          }}
-        >
-          Ordenar por
-        </Button>
+        <OrderByBtn orderBy={orderBy} setOrderBy={setOrderBy} />
         <Button
           sx={{
             textTransform: 'none',

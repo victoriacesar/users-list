@@ -5,13 +5,14 @@ import { useMemo, useState } from 'react';
 import { StatusBox } from '../StatusBox';
 import { ActiveInactivePopup } from '../ActiveInactivePopup';
 import { formatDate } from '@/utils/formatters';
-import { tableHeaderItems } from '../../utils';
+import { sortData, tableHeaderItems } from '../../utils';
 
 interface UsersTableProps {
   inputSearch: string;
+  orderBy: string;
 }
 
-export const UsersTable = ({ inputSearch }: UsersTableProps) => {
+export const UsersTable = ({ inputSearch, orderBy }: UsersTableProps) => {
   const { palette } = useTheme();
 
   const [data, setData] = useState(mockedData);
@@ -19,16 +20,19 @@ export const UsersTable = ({ inputSearch }: UsersTableProps) => {
 
   const orderData = useMemo(() => {
     if (inputSearch) {
-      return data.filter((item) => {
+      const filteredData = data.filter((item) => {
         return (
           item.id.toString().includes(inputSearch) ||
           item.name.toLowerCase().includes(inputSearch.toLowerCase()) ||
           item.phone.includes(inputSearch)
         );
       });
+
+      return sortData(filteredData, orderBy);
     }
-    return data;
-  }, [inputSearch, data]);
+
+    return sortData(data, orderBy);
+  }, [inputSearch, data, orderBy]);
 
   const toggleActiveInactive = (userId: number, option: string) => {
     const findUserIndex = data.findIndex((item) => item.id === userId);
