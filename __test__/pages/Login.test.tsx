@@ -65,6 +65,7 @@ describe('LoginPage', () => {
 
   it('should render theme button', async () => {
     const themeButton = screen.getByRole('button', { name: `${'light' || 'dark'}` });
+
     expect(themeButton).toBeInTheDocument();
   });
 

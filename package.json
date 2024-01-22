@@ -9,7 +9,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "commit": "git-cz",
-    "test": "jest --detectOpenHandles",
+    "test": "jest  --runInBand --detectOpenHandles",
     "test:watch": "jest --watchAll"
   },
   "dependencies": {

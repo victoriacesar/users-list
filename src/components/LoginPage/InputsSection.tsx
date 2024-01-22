@@ -4,7 +4,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useMemo } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 
-interface StyledInputProps {
+export interface InputsSectionProps {
   handleClick: () => void;
   showPassword: boolean;
   handlePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -25,7 +25,7 @@ export const InputsSection = ({
   emailValue,
   handleEmail,
   errors,
-}: StyledInputProps) => {
+}: InputsSectionProps) => {
   const { palette } = useTheme();
 
   const transformPassword = useMemo(() => {
@@ -70,7 +70,7 @@ export const InputsSection = ({
           endAdornment: (
             <InputAdornment position="end">
               <IconButton aria-label="toggle password visibility" onClick={handleClick} edge="end">
-                {showPassword ? <VisibilityOff /> : <Visibility />}
+                {showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
           ),
