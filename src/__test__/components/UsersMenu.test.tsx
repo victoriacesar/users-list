@@ -1,5 +1,5 @@
 import { UsersMenu, UsersMenuProps } from '@/components/UsersPage';
-import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
+import { ThemeContextProvider, UsersContextProvider } from '@/hooks';
 import { api } from '@/services/api';
 import { fireEvent, render, screen } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
@@ -12,9 +12,9 @@ let mockProps: UsersMenuProps;
 const UsersMenuMock = (props: UsersMenuProps) => {
   return (
     <ThemeContextProvider>
-      <UsersProviderProvider>
+      <UsersContextProvider>
         <UsersMenu {...mockProps} {...props} />
-      </UsersProviderProvider>
+      </UsersContextProvider>
     </ThemeContextProvider>
   );
 };

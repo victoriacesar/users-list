@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
+import { ThemeContextProvider, UsersContextProvider } from '@/hooks';
 import { act } from 'react-dom/test-utils';
 import Users from '@/app/users/page';
 import MockAdapter from 'axios-mock-adapter';
@@ -20,9 +20,9 @@ jest.mock('../../hooks', () => {
 
 const UsersMock = () => (
   <ThemeContextProvider>
-    <UsersProviderProvider>
+    <UsersContextProvider>
       <Users />
-    </UsersProviderProvider>
+    </UsersContextProvider>
   </ThemeContextProvider>
 );
 

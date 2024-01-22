@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
+import { ThemeContextProvider, UsersContextProvider } from '@/hooks';
 import './global.css';
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ThemeContextProvider>
-          <UsersProviderProvider>{children}</UsersProviderProvider>
+          <UsersContextProvider>{children}</UsersContextProvider>
         </ThemeContextProvider>
       </body>
     </html>

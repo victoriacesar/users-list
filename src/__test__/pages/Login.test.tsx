@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import Login from '@/app/login/page';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
+import { ThemeContextProvider, UsersContextProvider } from '@/hooks';
 import { usersMock } from '../mock/usersMock';
 import MockAdapter from 'axios-mock-adapter';
 import { api } from '@/services/api';
@@ -21,9 +21,9 @@ jest.mock('next/navigation', () => {
 
 const LoginMock = () => (
   <ThemeContextProvider>
-    <UsersProviderProvider>
+    <UsersContextProvider>
       <Login />
-    </UsersProviderProvider>
+    </UsersContextProvider>
   </ThemeContextProvider>
 );
 

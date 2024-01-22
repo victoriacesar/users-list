@@ -23,7 +23,7 @@ export interface ITableData {
 
 const UsersProvider = createContext<IUsersContext>({} as IUsersContext);
 
-export function UsersProviderProvider({ children }: UsersContextProviderProps): JSX.Element {
+export function UsersContextProvider({ children }: UsersContextProviderProps): JSX.Element {
   const [usersData, setUsersData] = useState<ITableData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 

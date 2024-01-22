@@ -1,5 +1,5 @@
 import { UsersTable, UsersTableProps } from '@/components/UsersPage/UsersTable';
-import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
+import { ThemeContextProvider, UsersContextProvider } from '@/hooks';
 import { api } from '@/services/api';
 import { render, screen } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
@@ -22,9 +22,9 @@ jest.mock('../../hooks', () => {
 const UsersTableMock = (props: UsersTableProps) => {
   return (
     <ThemeContextProvider>
-      <UsersProviderProvider>
+      <UsersContextProvider>
         <UsersTable {...mockProps} {...props} />
-      </UsersProviderProvider>
+      </UsersContextProvider>
     </ThemeContextProvider>
   );
 };
