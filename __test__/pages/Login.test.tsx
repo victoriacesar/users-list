@@ -1,16 +1,23 @@
 import '@testing-library/jest-dom';
 import Login from '@/app/login/page';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
 import { usersMock } from '../mock/usersMock';
 import MockAdapter from 'axios-mock-adapter';
 import { api } from '@/services/api';
 import { act } from 'react-dom/test-utils';
+import { mockedUsers } from '@/mockedData';
+import { useRouter } from 'next/navigation';
 
-jest.mock('next/navigation', () => ({
-  useRouter: jest.fn(),
-}));
-
+jest.mock('next/navigation', () => {
+  const router = {
+    push: jest.fn(),
+    query: {},
+  };
+  return {
+    useRouter: jest.fn().mockReturnValue(router),
+  };
+});
 const LoginMock = () => (
   <ThemeContextProvider>
     <UsersProviderProvider>
@@ -35,6 +42,7 @@ describe('LoginPage', () => {
 
   afterEach(() => {
     mock.restore();
+    jest.clearAllMocks();
   });
 
   it('should render page title and subtitle', async () => {
@@ -65,5 +73,27 @@ describe('LoginPage', () => {
 
     expect(forgotPasswordButton).toBeInTheDocument();
     expect(accessPlatformButton).toBeInTheDocument();
+  });
+
+  it('should change theme color', () => {
+    const themeButton = screen.getByRole('button', { name: `${'light' || 'dark'}` });
+    const contentBeforeClick = themeButton.textContent;
+    fireEvent.click(themeButton);
+    const expectContentAfterClick = contentBeforeClick === 'light' ? 'dark' : 'light';
+
+    expect(themeButton).toHaveTextContent(expectContentAfterClick);
+  });
+
+  it('should make login successfully', () => {
+    const emailInput = screen.getByRole('textbox', { name: 'Email' });
+    const passwordInput = screen.getByRole('textbox', { name: 'Senha' });
+    const accessBtn = screen.getByRole('button', { name: 'platform-access' });
+
+    fireEvent.change(emailInput, { target: { value: mockedUsers[0].email } });
+    fireEvent.change(passwordInput, { target: { value: mockedUsers[0].password } });
+    fireEvent.click(accessBtn);
+
+    expect(useRouter().push).toHaveBeenCalledTimes(1);
+    expect(useRouter().push).toHaveBeenCalledWith('/users');
   });
 });
