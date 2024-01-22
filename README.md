@@ -44,7 +44,7 @@ You need to have the git installed in your machine to clone this repository.
 
 Clone this repository and inside the project root directory open the terminal and run the command:
 
-`yarn` ou `npm install`
+`yarn` or `npm install`
 
 #### Run in development mode
 
@@ -52,7 +52,7 @@ You need to have the node installed in your machine in version 18.17 to execute 
 
 After you installed all the dependencies you are ready to go so run the command in the terminal:
 
-`yarn dev` ou `npm run dev`
+`yarn dev` or `npm run dev`
 
 After that access in your browser the local address: <a href="http://localhost:3000">http://localhost:3000</a>
 
@@ -71,7 +71,7 @@ Replace the value of the variable for the API value.
 
 To run the tests of the project you have to open the terminal in the root directory and run the command:
 
-`yarn test` ou `npm run test`
+`yarn test` or `npm run test`
 
 ### Technologies
 
