@@ -1,9 +1,18 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { de } from 'date-fns/locale/de';
-import { useTheme } from '@/hooks';
+import { useTheme as useThemeLocal } from '@/hooks';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Filter, filtersItems } from '../utils';
 
@@ -22,7 +31,10 @@ export const FilterRow = ({
   filtersRows,
   removeFilter,
 }: FilterRowProps) => {
-  const { palette } = useTheme();
+  const { palette } = useThemeLocal();
+  const theme = useTheme();
+
+  const onlyMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const [filter, setFilter] = useState({
     column: '',
@@ -133,8 +145,9 @@ export const FilterRow = ({
       sx={{
         width: '100%',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: onlyMediumScreen ? 'flex-start' : 'center',
         gap: '10px',
+        flexDirection: onlyMediumScreen ? 'column' : 'row',
       }}
     >
       <CloseIcon

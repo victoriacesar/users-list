@@ -1,5 +1,5 @@
-import { useTheme } from '@/hooks/useTheme';
-import { Box, TextField, Typography } from '@mui/material';
+import { useTheme as useThemeLocal } from '@/hooks/useTheme';
+import { Box, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
 import { OrderByBtn } from '.';
 import { FiltersBtn } from './FiltersBtn';
@@ -26,7 +26,9 @@ export const UsersMenu = ({
   filtersRows,
   setFiltersRows,
 }: UsersMenuProps) => {
-  const { palette } = useTheme();
+  const { palette } = useThemeLocal();
+  const theme = useTheme();
+  const onlyMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>
@@ -46,6 +48,7 @@ export const UsersMenu = ({
           marginTop: '2rem',
           gap: '1rem',
           marginBottom: '2rem',
+          flexDirection: onlyMediumScreen ? 'column' : 'row',
         }}
       >
         <TextField
