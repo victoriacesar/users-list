@@ -37,7 +37,9 @@ export const Header = ({ handleChangeTab, value }: HeaderProps) => {
         }}
       >
         <ToggleThemeBtn />
-        <Avatar sx={{ bgcolor: palette.colorOptions.purple }}>V</Avatar>
+        <Avatar data-testid="avatar" sx={{ bgcolor: palette.colorOptions.purple }}>
+          V
+        </Avatar>
       </Box>
     </Box>
   );

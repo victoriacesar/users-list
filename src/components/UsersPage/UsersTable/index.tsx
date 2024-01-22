@@ -83,7 +83,7 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy, filtersRows }: UsersT
   if (isLoading || !data.length) {
     return (
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <CircularProgress color="primary" />
+        <CircularProgress color="primary" aria-label="loader" />
       </Box>
     );
   }
@@ -91,6 +91,7 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy, filtersRows }: UsersT
   return (
     <>
       <TableContainer
+        data-testid="sticky-table"
         sx={{
           maxHeight: 'calc(66.5px * 5)',
         }}

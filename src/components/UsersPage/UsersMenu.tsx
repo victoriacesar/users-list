@@ -5,7 +5,7 @@ import { OrderByBtn } from '.';
 import { FiltersBtn } from './FiltersBtn';
 import { Filter } from '../utils';
 
-interface UsersMenuProps {
+export interface UsersMenuProps {
   inputSearch: string;
   setInputSearch: Dispatch<SetStateAction<string>>;
   sortBy: string;

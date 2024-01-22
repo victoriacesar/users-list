@@ -32,6 +32,7 @@ export const Pagination = ({
 
   return (
     <TablePagination
+      data-testid="pagination-component"
       component="div"
       count={pageCount}
       page={page}

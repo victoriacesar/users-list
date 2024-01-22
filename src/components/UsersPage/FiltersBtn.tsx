@@ -56,6 +56,7 @@ export const FiltersBtn = ({ setFiltersRows, filtersRows }: FiltersBtnProps) => 
           vertical: 'bottom',
           horizontal: 'left',
         }}
+        data-testid="filter-by-tab-open"
       >
         <Box
           sx={{

@@ -60,6 +60,7 @@ export const OrderByBtn = ({ sortBy, setSortBy, orderBy, setOrderBy }: OrderByBt
           vertical: 'bottom',
           horizontal: 'left',
         }}
+        data-testid="order-by-tab-open"
       >
         <Box
           sx={{
@@ -88,6 +89,7 @@ export const OrderByBtn = ({ sortBy, setSortBy, orderBy, setOrderBy }: OrderByBt
                       />
                     }
                     label={item.label}
+                    data-testid="radio-button-order-by"
                   />
                 );
               })}

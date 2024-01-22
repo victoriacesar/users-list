@@ -7,7 +7,7 @@ const InputsSectionMock = (props: InputsSectionProps) => {
   return <InputsSection {...props} />;
 };
 
-describe.only('InputsSection', () => {
+describe('InputsSection', () => {
   beforeEach(() => {
     mockProps = {
       emailValue: 'test@gmail.com',

@@ -3,6 +3,20 @@ import { render, screen } from '@testing-library/react';
 import { ThemeContextProvider, UsersProviderProvider } from '@/hooks';
 import { act } from 'react-dom/test-utils';
 import Users from '@/app/users/page';
+import MockAdapter from 'axios-mock-adapter';
+import { api } from '@/services/api';
+import { usersMock } from '../mock/usersMock';
+
+jest.mock('../../src/hooks', () => {
+  const originalModule = jest.requireActual('../../src/hooks');
+  return {
+    ...originalModule,
+    useUsers: jest.fn(() => ({
+      usersData: usersMock,
+      isLoading: false,
+    })),
+  };
+});
 
 const UsersMock = () => (
   <ThemeContextProvider>
@@ -13,6 +27,13 @@ const UsersMock = () => (
 );
 
 describe('LoginPage', () => {
+  let mock: InstanceType<typeof MockAdapter>;
+
+  beforeAll(() => {
+    mock = new MockAdapter(api);
+    mock.onGet(`/users`).reply(200, usersMock);
+  });
+
   beforeEach(async () => {
     await act(async () => {
       render(<UsersMock />);
@@ -20,13 +41,20 @@ describe('LoginPage', () => {
   });
 
   afterEach(() => {
+    mock.restore();
     jest.clearAllMocks();
   });
 
-  it('should render page title', async () => {
-    const title = screen.getByRole('heading', { name: 'Usuários' });
+  it('should render avatar', async () => {
+    const avatarComponent = screen.getByTestId('avatar');
 
-    expect(title).toBeInTheDocument();
+    expect(avatarComponent).toBeInTheDocument();
+  });
+
+  it('should render avatar', async () => {
+    const pagination = screen.getByTestId('pagination-component');
+
+    expect(pagination).toBeInTheDocument();
   });
 
   it('should render input search', async () => {
@@ -41,5 +69,17 @@ describe('LoginPage', () => {
 
     expect(orderButton).toBeInTheDocument();
     expect(filterButton).toBeInTheDocument();
+  });
+
+  it('should render users table', async () => {
+    const usersTable = screen.getByTestId('sticky-table');
+
+    expect(usersTable).toBeInTheDocument();
+  });
+
+  it('should render pagination component', async () => {
+    const pagination = screen.getByTestId('pagination-component');
+
+    expect(pagination).toBeInTheDocument();
   });
 });
