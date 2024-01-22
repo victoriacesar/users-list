@@ -116,6 +116,7 @@ export const LoginInfo = () => {
         Esqueceu sua senha?
       </Typography>
       <Button
+        aria-label="platform-access"
         disableRipple
         sx={{
           textTransform: 'none',
