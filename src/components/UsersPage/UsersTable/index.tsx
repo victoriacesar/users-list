@@ -16,7 +16,7 @@ import { Filter, advancedFilters, sortData, tableHeaderItems } from '../../utils
 import { useUsers, useTheme, ITableData } from '@/hooks';
 import { Pagination } from '../Pagination';
 
-interface UsersTableProps {
+export interface UsersTableProps {
   inputSearch: string;
   sortBy: string;
   orderBy: string;
@@ -126,6 +126,7 @@ export const UsersTable = ({ inputSearch, sortBy, orderBy, filtersRows }: UsersT
                     backgroundColor: palette.background?.default,
                   },
                 }}
+                data-testid="table-row"
               >
                 <TableCell scope="row" sx={{ width: '120px' }} align="center">
                   {row.id}

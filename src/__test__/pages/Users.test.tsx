@@ -7,8 +7,8 @@ import MockAdapter from 'axios-mock-adapter';
 import { api } from '@/services/api';
 import { usersMock } from '../mock/usersMock';
 
-jest.mock('../../src/hooks', () => {
-  const originalModule = jest.requireActual('../../src/hooks');
+jest.mock('../../hooks', () => {
+  const originalModule = jest.requireActual('../../hooks');
   return {
     ...originalModule,
     useUsers: jest.fn(() => ({
