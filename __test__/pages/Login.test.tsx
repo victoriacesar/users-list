@@ -18,6 +18,7 @@ jest.mock('next/navigation', () => {
     useRouter: jest.fn().mockReturnValue(router),
   };
 });
+
 const LoginMock = () => (
   <ThemeContextProvider>
     <UsersProviderProvider>
@@ -95,5 +96,26 @@ describe('LoginPage', () => {
 
     expect(useRouter().push).toHaveBeenCalledTimes(1);
     expect(useRouter().push).toHaveBeenCalledWith('/users');
+  });
+
+  it('should show errors messages when credentials not match', () => {
+    const emailInput = screen.getByRole('textbox', { name: 'Email' });
+    const passwordInput = screen.getByRole('textbox', { name: 'Senha' });
+    const accessBtn = screen.getByRole('button', { name: 'platform-access' });
+
+    fireEvent.change(emailInput, { target: { value: 'wrongEmail' } });
+    fireEvent.change(passwordInput, { target: { value: 'wrongPassword' } });
+    fireEvent.click(accessBtn);
+
+    const errorEmail = screen.getByRole('heading', {
+      name: 'Email não encontrado. Confira e tente novamente.',
+    });
+    const errorPassword = screen.getByRole('heading', {
+      name: 'Senha incorreta. Por favor, verifique e tente novamente.',
+    });
+
+    expect(useRouter().push).not.toHaveBeenCalled();
+    expect(errorEmail).toBeInTheDocument();
+    expect(errorPassword).toBeInTheDocument();
   });
 });
