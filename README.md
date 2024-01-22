@@ -67,6 +67,12 @@ NEXT_PUBLIC_API_URL=value
 
 Replace the value of the variable for the API value.
 
+#### Run the tests
+
+To run the tests of the project you have to open the terminal in the root directory and run the command:
+
+`yarn test` ou `npm run test`
+
 ### Technologies
 
 The following technologies were used in this project:
